@@ -20,7 +20,7 @@
 #    You should have received a copy of the GNU Lesser General Public License
 #    along with MFRC522-Python.  If not, see <http://www.gnu.org/licenses/>.
 #
-import RPi.GPIO as GPIO
+from gpiozero import DigitalOutputDevice
 import spidev
 import signal
 import time
@@ -134,22 +134,11 @@ class MFRC522:
         self.logger.addHandler(logging.StreamHandler())
         level = logging.getLevelName(debugLevel)
         self.logger.setLevel(level)
-
-        gpioMode = GPIO.getmode()
-        
-        if gpioMode is None:
-            GPIO.setmode(pin_mode)
-        else:
-            pin_mode = gpioMode
             
         if pin_rst == -1:
-            if pin_mode == 11:
-                pin_rst = 15
-            else:
-                pin_rst = 22
+            pin_rst = 15
             
-        GPIO.setup(pin_rst, GPIO.OUT)
-        GPIO.output(pin_rst, 1)
+        self._RST = DigitalOutputDevice(pin_rst, initial_value=True)
         self.MFRC522_Init()
 
     def MFRC522_Reset(self):
@@ -164,7 +153,6 @@ class MFRC522:
 
     def Close_MFRC522(self):
         self.spi.close()
-        GPIO.cleanup()
 
     def SetBitMask(self, reg, mask):
         tmp = self.Read_MFRC522(reg)
