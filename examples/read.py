@@ -1,7 +1,7 @@
 #!/usr/bin/env python 
 # import libraries
 import gpiozero 
-from mfrc522 import SimpleMFRC522 
+from joyit_mfrc522 import SimpleMFRC522 
 
 # initialize object for rfid module
 reader = SimpleMFRC522() 
