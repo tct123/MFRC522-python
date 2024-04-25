@@ -11,17 +11,14 @@ setuptools.setup(
     description="A library to integrate the MFRC522 RFID readers with the Raspberry Pi",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/joy-it/MFRC522-python",
+    url="https://github.com/tct123/MFRC522-python",
     packages=setuptools.find_packages(),
-    install_requires=[
-        'gpiozero',
-        'spidev'
-        ],
+    install_requires=["gpiozero", "spidev"],
     classifiers=[
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
         "Operating System :: POSIX :: Linux",
-        'Topic :: System :: Hardware',
+        "Topic :: System :: Hardware",
     ],
 )
